@@ -1,0 +1,953 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display|Roboto&display=swap');
+/* global style start for the entire body*/
+body {
+	background-image: url('pinkwall.png');
+    font-family: "Roboto", "Helvetica", "Sans-serif"; /*one of the custom fonts I imported*/  
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #000000;
+    line-height: 1.7;
+}   
+
+* {
+    outline: none; /*There will be no outlines for any elements*/
+}
+
+*:not(.slick-track):not(.slick-list) { /*means except with the class of slick track or slick list*/
+    transition: 0.4s; /*css transition to add animated effect rather than just a quick blink change to different css states*/
+	                  /*with this 0.4 second transition will give effect on every element on the page except the slick slider elements(slick-track and slick-list classes)*/
+}
+/*global style end for the entire body*/
+
+.container { 
+    max-width: 1140px;
+    margin: 0 auto; /*horizontally center it on the page*/
+    padding: 0 20px; /*padding 20px on the rigt and the left*/
+}
+
+/*flex box styling*/
+.flex { /*I am using flex instead of float right, float left*/
+    display: flex; /*act as a flex box*/
+    justify-content: space-between; /*spaced them out horizontally from one another*/
+}
+/*styling all the headers*/
+h1, h2, h3, h4, h5 {
+    margin: 0; /*remove all the default margins and padding for all headers as some browser may add apply*/
+    padding: 0;
+}
+
+h1, h2 {  /*target both h1 and h2*/
+    font-family: "Playfair Display", serif; /*another custom fonts I imported*/ 
+    font-weight: 800;
+}
+
+h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+	color: blue;
+	-webkit-animation: mymove 5s infinite; /* Chrome, Safari, Opera */
+    animation: mymove 5s infinite;
+}
+/*change the color of h1 by adding an animation*/
+/* Chrome, Safari, Opera */
+@-webkit-keyframes mymove {
+  from {color: yellow;}
+  to {color: red;}
+}
+
+/* Standard syntax */
+@keyframes mymove {
+  from {color: red;}
+  to {color: yellow;}
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: #f69314; /*orange color*/
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+h3 {
+    font-size: 1.4rem;
+    font-weight: 300;
+}
+
+h4 {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+h5 {
+    font-size: 1rem;
+    font-family: "Playfair Display", serif; /*imported font*/
+}
+
+p {
+    margin: 0 0 1rem; /*0 on the top, 0 on the right, 1rem on the bottom and 1rem on the left*/
+}
+/*target button with the class of rounded*/
+button.rounded {
+    background: #f69314; /*orange color*/
+    border: none;
+    color: #ffffff; 
+    font-size: 16px;
+    border-radius: 30px; /*to give it nice rounded look*/
+    padding: 10px 30px;
+    line-height: 1.5;
+    cursor: pointer;
+}
+ 
+/*target any paragraph tag with the class of large paragraph*/
+p.large-paragraph {
+	background-image: url("pinkwall.jpg");
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+
+
+/* start header styles */
+#header-hero-container { /*ID header-hero-container*/
+    min-height: 600px;
+    height: calc(100vh); /*ensure that the height of this will be full screen wheather it's a small screen or large screen it's going to calculate the height to perfectly be the height of the screen*/
+    position: relative;
+}
+ 
+ /*target header tag for styling the entire header section*/
+header {
+    background: transparent;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* using RGB colors with opacity*/ /*https://convertingcolors.com/rgb-color-52_58_64.html*/
+    position: fixed; /*it scrolls with us as we scroll down the page page the header stays persistent*/
+    width: 100%;
+    z-index: 3;/*this is going to make sure that it kind of stays on top of other positioned elements as we scroll*/
+}
+
+#logo { /*target ID logo*/ 
+    font-family: "Roboto", "Helvetica", "Sans-serif";
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-decoration: none;
+    position: relative;
+    top: 4px; /*just to look it more vertically and centered by bringing it down a little bit*/
+}
+
+
+.burger-menu {
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    padding: 3px 5px;
+    width: 30px; /*width for per search pointer*/
+    cursor: pointer;
+    margin-top: 10px;
+    display: none; /*it is going to be hidden by default until I get to a smaller screen then it comes visible*/
+}
+
+/*taget the bergur menu spans that have a class of strip*/
+.burger-menu .strip {
+    display: block;
+    height: 1px;
+    background-color: #ffffff;
+    margin: 4px 0;
+}
+
+header ul {
+    list-style-type: none;
+}
+
+header ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+#close-flyout { /*it is going to target the little "X" button when the screen is smaller above on my burger menu*/
+    display: none; 
+}
+
+/*target the individual list inside of header list items*/
+header ul li a {
+    color: #999999;
+    font-size: 16px;
+    text-decoration: none; /*remove those underlines*/
+}
+
+header ul.is-sticky li a { /*target the individual list of header ul with class of is-sticky*/
+    color: #000000; /*for the flyout menu to make the color black for all link ellements, as I made the backgound white*/
+}
+
+/*again target the indivitual links on hover and the class of active(home link)*/
+header ul li a:hover,
+header ul li a.active {
+    color: #ffffff;
+}
+
+/*target the links in the header section of the class of is-sticky on hover and the class of active(home link), it is for the flyout menu*/
+header ul.is-sticky li a:hover,
+header ul.is-sticky li a.active {
+    color: #f69314; /*orange color*/
+}
+/* end: header styles */
+
+/* start hero section styles */
+#hero {
+    background: url('mainpic.jpg') center center no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+}
+
+#hero .fade { /*div with the class of fade gives the fade affect(kind of see through)*/
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(75, 81, 87, 0.9); /* using RGB colors with opacity*/ /*https://convertingcolors.com/rgb-color-52_58_64.html*/
+    z-index: 1; /*Because the image has a z-index of -1, it will be placed behind the heading.*/
+}
+
+#hero .hero-text {
+    position: absolute;
+    top: 50%;
+    margin: -75px auto 0; /*vertically centered the text*/
+    left: 0;
+    right: 0;
+    z-index: 2;
+    color: #ffffff;
+    width: 500px;
+    text-align: center;
+}
+
+#hero .hero-text p { /*hero-text paragraph tag*/
+    line-height: 1.5em;
+    font-weight: 300;
+    font-size: 1rem;
+}
+/* end hero section styles */
+
+/* start how it works styles */
+#how-it-works { /*target ID how it works*/
+    padding: 3rem 0;
+    background: #f8f9fa; /*off white color*/ 
+    text-align: center;
+}
+
+#how-it-works h2 { /*h2 inside if the how it works section*/
+    margin-bottom: 3rem;
+}
+
+#how-it-works .flex > div { /*target the first div element inside of the flex box of how it works, NOTE:the greater than sign means it will grab the divs that are the first level children*/
+    width: 30%; /*gives h4 and p the width of 30%*/ 
+}
+
+#how-it-works h4 {
+    color: #343a40; /*dark grey color*/
+    margin-top: 1rem;
+}
+
+#how-it-works span.fas { /*target the fontawesome icon*/
+    color: #f69314; /*orange color*/
+    font-size: 35px;
+}
+/* end how it works styles */
+
+/* start properties styles */
+#properties { /*target the section tag by its ID*/
+    margin: 4rem 0 8rem;
+    position: relative;
+}
+
+#properties h2 {
+    margin-bottom: 3rem;
+}
+
+#properties .container { /*div with the class of container*/
+    position: relative;
+}
+
+#properties .container:before { /*pseudo element of the container div*/
+    content: "/"; /*a slash is going to be placed as a little element of in between the previous and next button in properties section*/
+    position: absolute;
+    right: 80px;
+    top: 18px;
+    color: #999999;  /*light grey color*/
+}
+
+#properties-slider a.slick-arrow { /*previous and next*/
+    color: #000000;
+    position: absolute;
+    top: -78px;
+    right: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    text-decoration: none;
+}
+
+#properties-slider a.slick-prev { /*grab the previous button here*/
+    right: 80px;
+}
+
+#properties-slider .slick-slide { /*grab anything with the class of slick-slide*/
+    padding: 0 15px;
+}
+
+#properties-slider img { /*grab the images inside of the slick-slider*/
+    width: 100%;
+    display: block;
+}
+
+#properties-slider .property-details { /*class of property-details which is inside of the properties-slider*/
+    padding: 1rem;
+}
+
+#properties-slider .price { 
+    font-size: 1.2rem;
+    color: #343a40; /*dark grey*/ 
+    font-weight: 800; 
+    margin: 0 0 0.5rem 0; /*top(0), right(0), bottom(0.5 rem), left(0)*/
+}
+
+#properties-slider .property-details span { 
+    font-size: 0.8rem;
+    padding-right: 15px;
+}
+
+#properties-slider .property-details span.baths {
+    padding-left: 10px;
+}
+
+#properties-slider .property-details span.sqft {
+    padding-right: 0;
+    padding-left: 10px;
+}
+
+#properties-slider .property-details span.beds,
+#properties-slider .property-details span.baths { /*for only bed and bath*/ 
+    border-right: 1px solid #888888; /*a lighter grey border*/
+}
+
+#properties-slider .property-details address {
+    font-size: 0.8rem;
+    font-style: normal;
+    margin-top: 0.5rem;
+}
+
+#properties button.rounded { /*View All Property Listings button*/
+    display: block;
+    margin: 2rem auto 0;
+    width: 350px; /*kind a bigger button*/
+}
+/* end properties styles */
+
+/* start agents styles */
+#agents {
+    margin: 4rem 0 6rem;
+    padding: 0 0 6rem;
+    border-bottom: 1px solid #cccccc;
+}
+
+#agents p.large-paragraph {
+    width: 50%; /*because I do not want it to stretcing across the entire container*/
+    margin-bottom: 4rem;
+}
+
+#agents .flex { /*div with the class of flex inside of the agents tag*/
+    flex-wrap: wrap; /*flex-wrap wraped for if the elements inside of the flex box get too wide to fit on one line it is okay to wrap them to the second line or possibly third or forth line*/
+    padding: 0;      /*I did not put flex-wrap:wrap earlier,and that's why all the agents got sqeeze and placed in one row*/
+}
+
+#agents .card {
+    width: 32%; /*this width is suitable for me to fit all the cute realtor perfectly in two rows*/
+    background: #f0f0f0; /*very very light grey color*/
+    margin-bottom: 2rem;
+}
+
+#agents .card img {
+    width: 100%; /*I am using all the images with same dimension(450X450)*/
+}
+
+#agents .card h3 {
+    font-family: "Playfair Display", serif;
+    color: #000000;
+}
+
+#agents .card h3,
+#agents .card p { /*leave some space from the left side of their container wall*/
+    padding-left: 1rem;
+}
+/*end agents styles*/
+
+/*start best real estate company styles*/
+#the-best { 
+    margin: 2rem 0;
+}
+
+#the-best .flex > img { /*by this greater than sign I am grabing the immedate image(for this case I have only one image) child of that flex container of the-best*/
+    width: 47%;
+}
+
+#the-best .flex > div { /*by this greater than sign I am grabing the immedate div(for this case I have only one div) child of that flex container of the-best*/
+    width: 40%;
+}
+
+#the-best ul {
+    padding-left: 20px;
+    margin-bottom: 4rem;
+}
+
+#the-best ul li {
+    margin: 10px 0; /*spaced them out frm one another*/
+}
+/*end best real estate company styles*/
+
+/*start services styles*/
+#services {
+    background: #f8f9fa; /*off white*/
+    padding: 6rem 0;
+    margin: 8rem 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+#services h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+#services .flex { /*again they need to wrap two different rows*/
+    flex-wrap: wrap;
+}
+
+#services .flex > div { /*the immedate div children of services*/
+    width: 30%;
+    margin-bottom: 2rem;
+}
+
+#services .flex > div .fas { /*grab font awesome icons*/
+    color: #f69314; /*orange color*/
+    font-size: 40px;
+    float: left;
+    margin-top: 15px;
+    width: 20%;
+    text-align: center;
+}
+
+#services .flex > div .services-card-right { /*all the three h3 and p*/
+    float: right;
+    width: 75%;
+}
+
+#services .flex > div a {
+    color: #f69314; /*orange color*/
+    text-decoration: none;
+}
+
+#services .flex > div a:hover {
+    text-decoration: underline;
+}
+/*end my styles*/
+
+
+#testimonials {
+    margin-bottom: 8rem;
+}
+
+#testimonials h2 {
+    text-align: center;
+}
+
+#testimonials-slider .slick-slide { /*grap each of the slick slide item inside the testimonial slider*/
+    text-align: center;
+}
+
+#testimonials-slider blockquote {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin: 1rem auto 3rem;
+    max-width: 740px;
+}
+
+#testimonials-slider .testimonials-caption {
+    width: 200px;
+    margin: 0 auto;
+}
+
+#testimonials-slider .testimonials-caption img {
+    float: left;
+    border-radius: 30px;
+    width: 60px;
+}
+
+.testimonials-caption p {
+    position: relative;
+    top: 13px;
+    font-size: 1.2rem;
+}
+
+#testimonials-slider .slick-arrow { /*left arrow*/
+    text-decoration: none;
+    position: absolute;
+    font-size: 40px;
+    color: #222222; /*lighter black*/
+    top: 50%;
+    margin-top: -35px;
+}
+#testimonials-slider .slick-next { /*right arrow*/
+    right: 0;
+}
+/* end: testimonials styles */
+
+/* start: contact us styles */
+#contact {
+    background: #f8f9fa;
+    padding: 4rem 0 8rem;
+}
+
+#contact h2 {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+#form-container {
+    width: 58%;
+    background: #ffffff;
+    padding: 3rem;
+    box-sizing: border-box; /*so that the padding does add on to the overall width of the container*/
+}
+
+#form-container h3 {
+    color: #00000;
+    font-family: "Playfair Display", serif;
+    margin-bottom: 2rem;
+}
+
+#form-container label {
+    display: block;
+    color: #00000;
+    margin-top: 1rem;
+}
+
+#form-container input,
+#form-container textarea {
+    display: block;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid #ced4da; /*light grey*/
+    width: 100%;
+    box-sizing: border-box;
+    height: 43px;
+    font-family: "Roboto", "Helvetica", "Sans-serif";
+    font-size: 1rem;
+    color: #495057; /*darker grey*/
+}
+
+#form-container textarea {
+    height: 170px;
+    margin-bottom: 2rem;
+    resize: none; /*user can not click and drag and resize it and possibly messed u my layout*/
+}
+
+#address-container {
+    width: 38%;
+    background: #ffffff;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    height: 300px;
+}
+
+#address-container label {
+    font-weight: 700;
+    display: block;
+    margin-top: 2rem;
+}
+
+#address-container label:first-child {
+    margin-top: 0;
+}
+
+#address-container address {
+    margin-bottom: 1.5rem;
+    font-style: normal; /*the address tag set the font style italic by default*/
+}
+
+#address-container a {
+    text-decoration: none;
+    color: #f69314; /*orange color*/
+}
+
+#address-container a:hover {
+    text-decoration: underline;
+}
+/*end contact us styles*/
+
+/*start footer styles*/
+footer {
+    background: #333333; /*lighter black*/
+    padding: 8rem 0;
+	color: #777777;
+}
+
+footer .flex {
+    padding-bottom: 6rem; /*spacing between the footer and the copywrite*/
+    border-bottom: 1px solid #777777;
+}
+
+footer h5 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+    font-weight: 300;
+}
+
+footer h5.follow-us {
+    margin-top: 1rem; /*spacing above follow us*/
+}
+
+footer .footer-about { /*About sunrise development*/
+    width: 47%;
+}
+
+footer .footer-about p { /*paragraph inside the footer about section*/
+    width: 65%;
+}
+
+footer .footer-quick-links {/*Quick links*/
+    width: 16%;
+}
+
+footer .footer-quick-links ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer .footer-quick-links ul li {
+    margin: 10px 0;
+}
+
+footer .footer-quick-links ul li a {
+    color: #777777;
+    text-decoration: none;
+}
+
+footer .footer-quick-links ul li a:hover {
+    color: #ffffff;
+}
+
+footer .footer-subscribe { /*Subscribe to our Newsletter*/
+    width: 35%;
+}
+
+#subscribe-container {
+    position: relative;
+}
+
+footer .footer-subscribe input {
+    border-radius: 30px;
+    height: 43px;
+    font-family: "Roboto", "Helvetica", "Sans-serif";
+    border: 1px solid #6c757d; 
+    background-color: transparent;
+    font-size: 1rem;
+    padding: 10px;
+    color: #ffffff;
+    box-sizing: border-box;
+    width: 80%;
+}
+
+footer button.right-rounded {
+    border-top-right-radius: 30px; /*the top left, bottom left of the button stay square*/
+    border-bottom-right-radius: 30px;
+    background: #f69314; /*orange color*/
+    font-size: 16px;
+    color: #000000;
+    padding: 10px 30px 9px;
+    line-height: 1.5;
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    right: 0; /*sticks over to the very right side and sits on top of the input element*/
+}
+
+footer button.right-rounded:hover {
+    background: #ffffff;
+}
+
+footer .footer-subscribe ul { /*holds my social media links*/
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer .footer-subscribe ul li {
+    display: inline-block; /*they sit next to each other horizontally*/
+    margin: 0 16px;
+}
+
+footer .footer-subscribe ul li:first-child {
+    margin-left: 0;
+}
+
+footer .footer-subscribe ul li a {
+    text-decoration: none;
+    color: #777777;
+}
+
+footer .footer-subscribe ul li a:hover {
+    color: #ffffff;
+}
+
+footer small { /*copyright section on the bottom*/
+    margin-top: 3rem;
+    font-size: 1rem;
+    display: block;
+    text-align: center;
+}
+
+footer small a {
+    color: #777777;
+    text-decoration: none;
+}
+
+footer small a:hover {
+    color: #ffffff;
+}
+/*end footer styles*/
+
+/* start: media queries */
+@media (max-width: 991px) {
+    #logo {
+        top: 1px;
+    }
+
+    #nav-toggle {
+        display: block;
+    }
+
+    nav ul {
+        position: fixed;
+        background: #fff;
+        right: -100%;
+        top: 0;
+        margin: 0;
+        padding: 2rem;
+        height: 100%;
+        width: 300px;
+        box-sizing: border-box;
+        box-shadow: 5px 0 10px 3px #999;
+    }
+
+    #close-flyout {
+        position: absolute;
+        right: 2rem;
+        top: 1.5rem;
+        font-size: 30px;
+        color: #777;
+        cursor: pointer;
+        display: block;
+        line-height: 1;
+        margin: 0;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 20px 0;
+    }
+
+    nav ul li:first-child {
+        margin-top: 50px;
+    }
+    nav ul li a {
+        font-size: 20px;
+        color: #212529;
+    }
+
+    nav ul li a.active,
+    nav ul li a:hover {
+        color: #f69314;
+    }
+}
+
+@media (max-width: 767px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    .large-paragraph {
+        font-size: 1rem;
+    }
+
+    p {
+        font-size: 0.8rem;
+    }
+
+    .container {
+        max-width: 540px;
+    }
+
+    #hero .hero-text {
+        width: 400px;
+    }
+
+    #agents .card {
+        width: 49%;
+    }
+
+    #the-best .flex > img {
+        display: none;
+    }
+
+    #the-best .flex > div {
+        width: 100%;
+    }
+
+    #testimonials-slider p {
+        font-size: 1.2rem;
+    }
+
+    #properties .container:before {
+        top: 2px;
+        font-size: 0.85rem;
+    }
+
+    #properties-slider a.slick-arrow {
+        font-size: 0.85rem;
+    }
+
+    #properties button.rounded {
+        width: 300px;
+    }
+
+    #services .flex > div {
+        width: 48%;
+    }
+
+    #contact .flex {
+        flex-wrap: wrap;
+    }
+
+    #form-container {
+        width: 100%;
+        padding: 2rem;
+    }
+
+    #address-container {
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    footer {
+        padding: 6rem 0;
+    }
+
+    footer .flex {
+        flex-wrap: wrap;
+    }
+
+    footer .flex > div {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    footer .flex > div:first-child {
+        margin-top: 0;
+    }
+
+    footer .footer-about p {
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    footer .footer-subscribe input {
+        width: 90%;
+    }
+
+    footer h5.follow-us {
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 500px) {
+    #hero .hero-text {
+        width: 330px;
+    }
+
+    #agents {
+        margin: 4rem 0 3rem;
+        padding: 0 0 3rem;
+    }
+
+    #agents .card {
+        width: 100%;
+    }
+
+    #agents p.large-paragraph {
+        width: 100%;
+    }
+
+    #how-it-works .flex {
+        display: block;
+    }
+
+    #how-it-works .flex > div {
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    #properties button.rounded {
+        width: 250px;
+    }
+
+    #services {
+        padding: 4rem 0 3rem;
+        margin: 4rem 0;
+    }
+
+    #services .flex > div {
+        width: 100%;
+    }
+
+    #testimonials {
+        margin-bottom: 4rem;
+    }
+
+    #testimonials-slider p {
+        font-size: 1rem;
+    }
+
+    #testimonials-slider .slick-arrow {
+        display: none !important;
+    }
+
+    #contact {
+        padding: 4rem 0;
+    }
+
+    #contact h2 {
+        margin-bottom: 2rem;
+    }
+
+    #form-container {
+        padding: 1.5rem;
+    }
+
+    footer {
+        padding: 4rem 0;
+    }
+}
+/* end: media queries */

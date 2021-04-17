@@ -1,0 +1,532 @@
+<script>
+        $(function () {
+            let headerElem = $('header');
+            let logo = $('#logo');
+            let navMenu = $('#nav-menu');
+            let navToggle = $('#nav-toggle');
+
+           $('#properties-slider').slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                prevArrow: '<a href="#" class="slick-arrow slick-prev">previous</a>',
+                nextArrow: '<a href="#" class="slick-arrow slick-next">next</a>',
+                responsive: [
+                    {
+                        breakpoint: 1100,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1,
+                            infinite: true,
+                        }
+                    },
+                    {
+                        breakpoint: 767,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                            infinite: true,
+                        }
+                    },
+                    {
+                        breakpoint: 530,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            infinite: true,
+                        }
+                    }
+                ]
+           });
+
+           $('#testimonials-slider').slick({
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                prevArrow: '<a href="#" class="slick-arrow slick-prev"><</a>',
+                nextArrow: '<a href="#" class="slick-arrow slick-next">></a>'
+           });
+
+           navToggle.on('click', () => {
+               navMenu.css('right', '0');
+           });
+
+           $('#close-flyout').on('click', () => {
+                navMenu.css('right', '-100%');
+           });
+
+           $(document).on('click', (e) => {
+               let target = $(e.target);
+               if (!(target.closest('#nav-toggle').length > 0 || target.closest('#nav-menu').length > 0)) {
+                   navMenu.css('right', '-100%');
+               }
+           });
+
+           $(document).scroll(() => {
+               let scrollTop = $(document).scrollTop();
+
+               if (scrollTop > 0) {
+                   navMenu.addClass('is-sticky');
+                   logo.css('color', '#000');
+                   headerElem.css('background', '#fff');
+                   navToggle.css('border-color', '#000');
+                   navToggle.find('.strip').css('background-color', '#000');
+               } else {
+                   navMenu.removeClass('is-sticky');
+                   logo.css('color', '#fff');
+                   headerElem.css('background', 'transparent');
+                   navToggle.css('bordre-color', '#fff');
+                   navToggle.find('.strip').css('background-color', '#fff');
+               }
+
+               headerElem.css(scrollTop >= 200 ? {'padding': '0.5rem', 'box-shadow': '0 -4px 10px 1px #999'} : {'padding': '1rem 0', 'box-shadow': 'none' });
+           });
+
+           $(document).trigger('scroll');
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+/*start media queries*/
+ /*to make my website responsive*/
+@media (max-width: 991px) { /*will do for 991px break point*/
+    #logo {
+        top: 1px;
+    }
+
+    #nav-toggle { /*my burger menu button will be visible on screens that are 991px or smaller*/
+        display: block;
+    }
+
+    nav ul { /*if the burger menu is visible*/ /*the flyout menu*/
+        position: fixed;
+        background: #fffff;
+        right: -100%; /*by default it is off the page to the right so it looks like it is invisible*/
+        top: 0;
+        margin: 0;
+        padding: 2rem;
+        height: 100%; /*fit in entire screen*/
+        width: 300px;
+        box-sizing: border-box; /*so that the padding does not pincrease the width*/
+        box-shadow: 5px 0 10px 3px #999999; /*to make a shadow border*/
+    }
+
+    #close-flyout { /*close button on the flyout(X)*/
+        position: absolute;
+        right: 2rem;
+        top: 1.5rem;
+        font-size: 30px;
+        color: #777777;
+        cursor: pointer;
+        display: block;
+        line-height: 1;
+        margin: 0;
+    }
+
+    nav ul li {
+        display: block; /*they can stack one on top of the others*/
+        margin: 20px 0;
+    }
+
+    nav ul li:first-child { /*Home*/
+        margin-top: 50px;
+    }
+    nav ul li a {
+        font-size: 20px;
+        color: #212529; /*darker grey*/
+    }
+
+    nav ul li a.active,
+    nav ul li a:hover {
+        color: #f69314; /*orange*/
+    }
+}
+
+@media (max-width: 767px) { /*second break point*/
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    .large-paragraph {
+        font-size: 1rem;
+    }
+
+    p {
+        font-size: 0.8rem;
+    }
+
+    .container { /*setting everything with the class of container doww to max width 540px*/
+        max-width: 540px;
+    }
+
+    #hero .hero-text {
+        width: 400px;
+    }
+
+    #agents .card {
+        width: 49%;
+    }
+
+    #the-best .flex > img {
+        display: none;
+    }
+
+    #the-best .flex > div {
+        width: 100%; /*to display the image as well*/
+    }
+
+    #testimonials-slider p {
+        font-size: 1.2rem;
+    }
+
+    #properties .container:before { /*slash '/' at the top left of the properties section*/
+        top: 2px;
+        font-size: 0.85rem;
+    }
+
+    #properties-slider a.slick-arrow { /*previous and next*/
+        font-size: 0.85rem;
+    }
+
+    #properties button.rounded {
+        width: 300px;
+    }
+
+    #services .flex > div {
+        width: 48%; /*for each of the elements*/
+    }
+
+    #contact .flex {
+        flex-wrap: wrap;
+    }
+
+    #form-container {
+        width: 100%;
+        padding: 2rem;
+    }
+
+    #address-container {
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    footer {
+        padding: 6rem 0;
+    }
+
+    footer .flex {
+        flex-wrap: wrap;
+    }
+
+    footer .flex > div { /*will stack one on top of the other*/
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    footer .flex > div:first-child {
+        margin-top: 0;
+    }
+
+    footer .footer-about p {
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    footer .footer-subscribe input {
+        width: 90%;
+    }
+	
+    footer h5.follow-us {
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 500px) { /*another media query for screen of 500px or smaller(for mobile)*/
+    #hero .hero-text {
+        width: 330px;
+    }
+
+    #agents {
+        margin: 4rem 0 3rem;
+        padding: 0 0 3rem;
+    }
+
+    #agents .card {
+        width: 100%;
+    }
+
+    #agents p.large-paragraph {
+        width: 100%;
+    }
+
+    #how-it-works .flex {
+        display: block; /*no longer behave as a flex box jst display like a normal block*/
+    }
+
+    #how-it-works .flex > div {
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    #properties button.rounded {
+        width: 250px;
+    }
+
+    #services {
+        padding: 4rem 0 3rem;
+        margin: 4rem 0;
+    }
+
+    #services .flex > div {
+        width: 100%;
+    }
+
+    #testimonials {
+        margin-bottom: 4rem;
+    }
+
+    #testimonials-slider p {
+        font-size: 1rem;
+    }
+
+    #testimonials-slider .slick-arrow {
+        display: none !important; /*I dont want to display the arrow in small screen*/
+    }
+
+    #contact {
+        padding: 4rem 0;
+    }
+
+    #contact h2 {
+        margin-bottom: 2rem;
+    }
+
+    #form-container {
+        padding: 1.5rem;
+    }
+
+    footer {
+        padding: 4rem 0;
+    }
+}
+/*end media queries*/
+ 
+@media (max-width: 500px) {
+    #hero .hero-text {
+        width: 330px;
+    }
+
+    #agents {
+        margin: 4rem 0 3rem;
+        padding: 0 0 3rem;
+    }
+
+    #agents .card {
+        width: 100%;
+    }
+
+    #agents p.large-paragraph {
+        width: 100%;
+    }
+
+    #how-it-works .flex {
+        display: block;
+    }
+
+    #how-it-works .flex > div {
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    #properties button.rounded {
+        width: 250px;
+    }
+
+    #services {
+        padding: 4rem 0 3rem;
+        margin: 4rem 0;
+    }
+
+    #services .flex > div {
+        width: 100%;
+    }
+
+    #testimonials {
+        margin-bottom: 4rem;
+    }
+
+    #testimonials-slider p {
+        font-size: 1rem;
+    }
+
+    #testimonials-slider .slick-arrow {
+        display: none !important;
+    }
+
+    #contact {
+        padding: 4rem 0;
+    }
+
+    #contact h2 {
+        margin-bottom: 2rem;
+    }
+
+    #form-container {
+        padding: 1.5rem;
+    }
+
+    footer {
+        padding: 4rem 0;
+    }
+}
+@media (max-width: 500px) {
+    #hero .hero-text {
+        width: 330px;
+    }
+
+    #agents {
+        margin: 4rem 0 3rem;
+        padding: 0 0 3rem;
+    }
+
+    #agents .card {
+        width: 100%;
+    }
+
+    #agents p.large-paragraph {
+        width: 100%;
+    }
+
+    #how-it-works .flex {
+        display: block;
+    }
+
+    #how-it-works .flex > div {
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    #properties button.rounded {
+        width: 250px;
+    }
+
+    #services {
+        padding: 4rem 0 3rem;
+        margin: 4rem 0;
+    }
+
+    #services .flex > div {
+        width: 100%;
+    }
+
+    #testimonials {
+        margin-bottom: 4rem;
+    }
+
+    #testimonials-slider p {
+        font-size: 1rem;
+    }
+
+    #testimonials-slider .slick-arrow {
+        display: none !important;
+    }
+
+    #contact {
+        padding: 4rem 0;
+    }
+
+    #contact h2 {
+        margin-bottom: 2rem;
+    }
+
+    #form-container {
+        padding: 1.5rem;
+    }
+
+    footer {
+        padding: 4rem 0;
+    }
+}
+@media (max-width: 500px) {
+    #hero .hero-text {
+        width: 330px;
+    }
+
+    #agents {
+        margin: 4rem 0 3rem;
+        padding: 0 0 3rem;
+    }
+
+    #agents .card {
+        width: 100%;
+    }
+
+    #agents p.large-paragraph {
+        width: 100%;
+    }
+
+    #how-it-works .flex {
+        display: block;
+    }
+
+    #how-it-works .flex > div {
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    #properties button.rounded {
+        width: 250px;
+    }
+
+    #services {
+        padding: 4rem 0 3rem;
+        margin: 4rem 0;
+    }
+
+    #services .flex > div {
+        width: 100%;
+    }
+
+    #testimonials {
+        margin-bottom: 4rem;
+    }
+
+    #testimonials-slider p {
+        font-size: 1rem;
+    }
+
+    #testimonials-slider .slick-arrow {
+        display: none !important;
+    }
+
+    #contact {
+        padding: 4rem 0;
+    }
+
+    #contact h2 {
+        margin-bottom: 2rem;
+    }
+
+    #form-container {
+        padding: 1.5rem;
+    }
+
+    footer {
+        padding: 4rem 0;
+    }
+}
+/* end: media queries */
